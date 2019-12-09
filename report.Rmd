@@ -7,7 +7,7 @@ output: html_document
 
 # 1.Introduction    
 ## 1.1 Data resource    
-Our data is about movies’ reviews on Amazon, the raw txt file can be downloaded from kaggle by the link below：   https://www.kaggle.com/dm4006/amazon-movie-reviews 
+Our data is about movies’ reviews on Amazon, the raw txt file can be found from kaggle by the link below：   https://www.kaggle.com/dm4006/amazon-movie-reviews 
  
 ## 1.2 Description of the data     
 In this dataset we have 8 variables : the movie's Product ID, the review's User ID, the Profile name(username),helpfulness(number of clicks on ‘helpful’), the score({1,2,3,4,5}) user rated the movie, time(timestamp),summary(wrote by user) and review text. Below is part of a record in the txt file.    
@@ -44,7 +44,7 @@ The t statistics is 166.1476, which is much larger than 1.96. The confidence int
 
 ### 2.2.2 Score & Length of review text 
 
-We do ANOVA of score and the length of the review text.The F statistics is 1961.403.It is sigificant. Then we do permutation(parallel) of the score, after the permutation, the F statistics is still large and the p-value is smaller than $e^{-5}$. The regression shows that the score and length of text has negative relationship, and the coefficient is sgnificant. 
+We do ANOVA of score and the length of the review text.The F statistics is 1961.403.It is significant. Then we do permutation(parallel) of the score, after the permutation, the F statistics is still large and the p-value is smaller than $10^{-5}$. The regression shows that the score and length of text has negative relationship, and the coefficient is significant. 
 
 ### 2.2.3 The Contents of reviews & Helpfulness rate 
 We caculated the wors's fequence of occurences for these reviews that  "helpfulness" greater than 10. Here are the wordcloud of the high(right) and low(left) helpfulness rate.  
