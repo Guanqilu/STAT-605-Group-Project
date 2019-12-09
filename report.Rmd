@@ -69,9 +69,9 @@ Then we checked the ratio of length of summary and length of review text, we can
 
 According to our analysis, we can found out that the score of the movie has negative relationship with the length of the review text.It makes sense that when viewers dislike a movie, they will use more words to express their unsatisfaction.
 
-The score of the movie has positive relationship with the rate of helpfulness, which means that the positive reviews will be esier to recieve "helpful" feedback.  
+The score of the movie has positive relationship with the rate of helpfulness, which means that the positive reviews will be easier to receive "helpful" feedback.  
 
-Over the 12 years, the scores that users gave to the movies dropped , which may suggest that people became more strict nowdays  due to the developement of movie industry. The users are too "busy" to write long reviews nowadays. The summary would be another choice when they have comments on movies.
+Over the 12 years, the scores that users gave to the movies dropped , which may suggest that people became more strict nowadays  due to the development of movie industry. The users are too "busy" to write long reviews nowadays. The summary would be another choice when they have comments on movies.
 
 Our weaknesses are: The regression we did is only linear regression, there may be other better models. The analysis of time is only done by plots, we didn't get into the quantity relationships.  
   
