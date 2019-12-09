@@ -1,3 +1,3 @@
 # STAT-605-Group-Project
 Final
-The final code will be upload by a tar file.
+Youhui Ye, Runfeng Yong, Guanqi Lu, Chong Wei, Fangyang Chen
