@@ -1,0 +1,77 @@
+---
+title: "STAT 605 Final Report"
+author: "Fangyang Chen, Guanqi Lu, Chong Wei, Youhui Ye,Runfeng Yong"
+date: "12/5/2019"
+output: html_document
+---
+
+# 1.Introduction    
+## 1.1 Data resource    
+Our data is about movies’ reviews on Amazon, the raw txt file can be downloaded from kaggle by the link below：   https://www.kaggle.com/dm4006/amazon-movie-reviews 
+ 
+## 1.2 Description of the data     
+In this dataset we have 8 variables : the movie's Product ID, the review's User ID, the Profile name(username),helpfulness(number of clicks on ‘helpful’), the score({1,2,3,4,5}) user rated the movie, time(timestamp),summary(wrote by user) and review text. Below is part of a record in the txt file.    
+![](movies.png)
+
+## 1.3 Question pursued   
+a. The relationship of scores and the length of review text.  
+b. The relationship of scores and the helpfulness.  
+c. The words frequency of high and low helpfulness rate.
+d. The way that user's behavior changed over time.    
+We'll use the bootstrap, regression and other statistics methods to achieve our goal. 
+
+# 2. Process
+
+## 2.1 Data extraction and cleaning
+
+We extracted the useful data from the 9GB txt file in HPC(parallel), and removed the duplications. In the "helpness" part, we removed the 0/0 items. For the timestamp, we converted this to real date. After the data cleaning, we have about 1000000 reccords.This step was done with shell script.
+
+## 2.2 Analysis   
+### 2.2.1 Score & Helpfulness  
+The average score is 4.1, the lowest is 1. From the summary we can see many users gave full score——5.  
+![](scores.png)  
+Here is a boxplot of helpfulness rate of each score category. 
+
+![](score_help_bp.JPG){#id .class width=450 height=350px}
+
+
+We use bootstrap(parallel) to caculate coefficient of the regression between each score and each rate of helpfuness.Here is the distribution of the coefficients.
+
+![](coefficient.png)
+
+The t statistics is 166.1476, which is much larger than 1.96. The confidence interval of the coefficients is [1.016187, 1.040381]. It can be considered as a normal distribution, so we can do further test. The mean of the coefficients is 1.03, which means the score and the rate of helpfulness has positive relationship. 
+
+
+### 2.2.2 Score & Length of review text 
+
+We do ANOVA of score and the length of the review text.The F statistics is 1961.403.It is sigificant. Then we do permutation(parallel) of the score, after the permutation, the F statistics is still large and the p-value is smaller than $e^{-5}$. The regression shows that the score and length of text has negative relationship, and the coefficient is sgnificant. 
+
+### 2.2.3 The Contents of reviews & Helpfulness rate 
+We caculated the wors's fequence of occurences for these reviews that  "helpfulness" greater than 10. Here are the wordcloud of the high(right) and low(left) helpfulness rate.  
+
+!["helpfulness rate lower than 0.5"](low helpful rate.PNG){#id .class width=450 height=350px}
+!["helpfulness rate greater than 0.5"](high helpfuness rate.PNG){#id .class width=450 height=350px}
+
+### 2.2.4 Changes over Time
+To see how the behaviors of the users changed over time, we plot the scores, length of text, length of summary according to the timeline. These plots contains 500 data points. For each point the y axis was caculated by the average of previous 15 days and next 15 days.  
+
+As we can see from the score plot, the score is steady before 2007. After 2007, the score dropped over time. People became stricter when they give score to the movies.   
+The length of review text also dropped a lot between 2004 and 2007, then it became steady till March 2012, after 2012, the length of review started to drop again.  
+![](time with.png){#id .class width=450 height=300px}
+![](text.png){#id .class width=450 height=300px}
+
+However, the length of summary only dropped before 2010. After  2010, the length of summary became larger.  
+Then we checked the ratio of length of summary and length of review text, we can conclude that when users give comments to the movies, they are more likely to write long reviews in the past. Nowadays, people tend to write shorter reviews, and focus on much shorter version of comments——summary.   
+![](summary.png){#id .class width=450 height=300px}
+![](summarytext.png){#id .class width=450 height=300px}
+
+# 3. Conclusions and Weaknesses   
+
+According to our analysis, we can found out that the score of the movie has negative relationship with the length of the review text.It makes sense that when viewers dislike a movie, they will use more words to express their unsatisfaction.
+
+The score of the movie has positive relationship with the rate of helpfulness, which means that the positive reviews will be esier to recieve "helpful" feedback.  
+
+Over the 12 years, the scores that users gave to the movies dropped , which may suggest that people became more strict nowdays  due to the developement of movie industry. The users are too "busy" to write long reviews nowadays. The summary would be another choice when they have comments on movies.
+
+Our weaknesses are: The regression we did is only linear regression, there may be other better models. The analysis of time is only done by plots, we didn't get into the quantity relationships.  
+  
